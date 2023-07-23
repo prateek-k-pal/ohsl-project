@@ -16,6 +16,7 @@ COPY vendor/ /var/www/html/vendor/
 
 # Install PHP extensions (if needed)
 RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install mysqli
 
 # Expose ports for Apache
 EXPOSE 80 443

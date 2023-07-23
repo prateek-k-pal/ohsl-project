@@ -1,6 +1,7 @@
 
 
 <?php
+error_reporting(E_ALL); ini_set('display_errors', 1);
 require_once "config.php";   //connects config.php
 //variables
 $username = $password = $confirm_password = $State =$City= "";
@@ -37,10 +38,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
             else{
                 echo "Something went wrong";
             }
+
+            mysqli_stmt_close($stmt);
         }
     }
 
-    mysqli_stmt_close($stmt);
+    
 
 
 // Check for password
@@ -56,43 +59,41 @@ else{
 
 // Check for confirm password field
 if(trim($_POST['password']) !=  trim($_POST['confirm_password'])){
-    $password_err = "Passwords should match";
+    $confirm_password_err = "Passwords should match";
 }
 
 
 // If there were no errors, go ahead and insert into the database
-if(empty($username_err) && empty($password_err) && empty($confirm_password_err))
-{
-  $City = $_POST['City'];
-  $State = $_POST['State'];
-    // $sql = "INSERT INTO users (username, password,City,State) VALUES (?, ?,?,?)";
+// ... (previous code remains unchanged)
+
+// If there were no errors, go ahead and insert into the database
+if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
+    $City = $_POST['City'];
+    $State = $_POST['State'];
+
     $sql = "INSERT INTO users (username, password, City, State) VALUES (?, ?, ?, ?)";
-
     $stmt = mysqli_prepare($conn, $sql);
-    if ($stmt)
-    {
-        // mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
-        mysqli_stmt_bind_param($stmt, "ssss", $param_username, $param_password, $City, $State);
-
-
+    if ($stmt) {
         // Set these parameters
         $param_username = $username;
         $param_password = password_hash($password, PASSWORD_DEFAULT);  
         //makes the password hidden
 
+        // Bind parameters to the statement
+        mysqli_stmt_bind_param($stmt, "ssss", $param_username, $param_password, $City, $State);
+
         // Try to execute the query
-        if (mysqli_stmt_execute($stmt))
-        {
+        if (mysqli_stmt_execute($stmt)) {
             header("location: login.php");
-        }
-        else{
+        } else {
             echo "Something went wrong... cannot redirect!";
         }
-    }
-    // mysqli_stmt_close($stmt);
-    // mysqli_stmt_bind_param($stmt, "ssss", $param_username, $param_password, $City, $State);
 
+        // Close the statement after execution
+        mysqli_stmt_close($stmt);
+    }
 }
+
 mysqli_close($conn);
 }
 
@@ -217,17 +218,21 @@ mysqli_close($conn);
                     <div class="form-group col-md-6">
                         <label for="inputEmail4">Username</label>
                         <input type="text" class="form-control" name="username" id="inputEmail4" placeholder="Email">
+                        <p><?php echo $username_err; ?></p>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputPassword4">Password</label>
                         <input type="password" class="form-control" name="password" id="inputPassword4"
                                placeholder="Password">
+                        <p><?php echo $password_err; ?></p>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword4">Confirm Password</label>
                     <input type="password" class="form-control" name="confirm_password" id="inputPassword"
                            placeholder="Confirm Password">
+
+                    <p><?php echo $confirm_password_err; ?></p>
                 </div>
                 <div class="form-group">
                     <label for="inputAddress2">Address 2</label>

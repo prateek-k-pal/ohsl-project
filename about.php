@@ -3,10 +3,10 @@
     // Check if the user is logged in
     if (isset($_SESSION['username'])) {
         // Retrieve the user's name from the database based on their username
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "login";
+        $servername = "sql6.freemysqlhosting.net";
+        $username = "sql6634696";
+        $password = "ZYsbV2d5f7";
+        $dbname = "sql6634696";
 
         // Create connection
         $conn = new mysqli($servername, $username, $password, $dbname);
