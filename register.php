@@ -1,5 +1,3 @@
-
-
 <?php
 error_reporting(E_ALL); ini_set('display_errors', 1);
 require_once "config.php";   //connects config.php
@@ -85,6 +83,7 @@ if (empty($username_err) && empty($password_err) && empty($confirm_password_err)
         // Try to execute the query
         if (mysqli_stmt_execute($stmt)) {
             header("location: login.php");
+            exit();
         } else {
             echo "Something went wrong... cannot redirect!";
         }

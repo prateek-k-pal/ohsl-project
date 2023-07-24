@@ -6,7 +6,7 @@ session_start();
 if(isset($_SESSION['username']))
 {
     header("location: loggedin.php");
-    exit;
+    exit();
 }
 require_once "config.php";
 
@@ -44,13 +44,14 @@ if(empty($err))
                         if(password_verify($password, $hashed_password))
                         {
                             // this means the password is corrct. Allow user to login
-                            session_start();
+                            //session_start();
                             $_SESSION["username"] = $username;
                             $_SESSION["id"] = $id;
                             $_SESSION["loggedin"] = true;
 
                             //Redirect user to welcome page
                             header("location: welcome.php");
+                            exit();
                             
                         }
                     }
@@ -191,6 +192,7 @@ if(empty($err))
     <input type="checkbox" class="form-check-input" id="exampleCheck1">
     <label class="form-check-label" for="exampleCheck1">Check me out</label>
   </div>
+  <p><?php echo $err; ?></p>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
