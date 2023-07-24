@@ -21,6 +21,7 @@ RUN docker-php-ext-install pdo pdo_mysql
 RUN docker-php-ext-install mysqli
 
 # Install the OpenAI library using Composer
+ENV COMPOSER_ALLOW_SUPERUSER 1
 RUN composer require openai-php/client
 
 # Expose ports for Apache
