@@ -12,7 +12,9 @@ WORKDIR /var/www/html/
 COPY . /var/www/html/
 
 # Set the appropriate permissions for log.txt
-RUN chmod 755 /var/www/html/log.txt
+RUN chown www-data:www-data /var/www/html/log.txt
+RUN chmod 644 /var/www/html/log.txt
+
 
 # Install PHP extensions (if needed)
 RUN docker-php-ext-install pdo pdo_mysql
