@@ -215,6 +215,7 @@
             background-color: #f2f2f2;
         }
     </style>
+    <link rel="icon" type="image/x-icon" href="/ohsl_logo.ico">
 </head>
 <body>
 <div class="logo-container">

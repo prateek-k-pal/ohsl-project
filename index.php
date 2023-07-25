@@ -92,6 +92,7 @@
             z-index: -1;
         }
     </style>
+    <link rel="icon" type="image/x-icon" href="/ohsl_logo.ico">
 </head>
 <body>
 <div class="logo-container">
