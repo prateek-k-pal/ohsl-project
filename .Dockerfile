@@ -1,5 +1,5 @@
 # Start from a base image that includes PHP and other necessary components
-FROM php:latest
+FROM php:latest-apache
 
 # Install system dependencies and Composer
 RUN apt-get update && apt-get install -y git
@@ -22,8 +22,8 @@ RUN chmod 644 /var/www/html/log.txt
 
 
 # Install PHP extensions (if needed)
-RUN docker-php-ext-install pdo pdo_mysql
-RUN docker-php-ext-install mysqli
+#RUN docker-php-ext-install pdo pdo_mysql
+#RUN docker-php-ext-install mysqli
 
 
 # Expose ports for Apache
