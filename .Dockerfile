@@ -11,7 +11,12 @@ WORKDIR /var/www/html/
 # Copy your PHP web application files
 COPY . /var/www/html/
 
+# Install the OpenAI library using Composer
+ENV COMPOSER_ALLOW_SUPERUSER 1
+RUN composer install
+
 # Set the appropriate permissions for log.txt
+RUN touch log.txt
 RUN chown www-data:www-data /var/www/html/log.txt
 RUN chmod 644 /var/www/html/log.txt
 
@@ -20,9 +25,6 @@ RUN chmod 644 /var/www/html/log.txt
 RUN docker-php-ext-install pdo pdo_mysql
 RUN docker-php-ext-install mysqli
 
-# Install the OpenAI library using Composer
-ENV COMPOSER_ALLOW_SUPERUSER 1
-RUN composer require openai-php/client
 
 # Expose ports for Apache
 EXPOSE 80 443
