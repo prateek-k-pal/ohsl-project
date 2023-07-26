@@ -11,9 +11,9 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
     if (isset($_SESSION['username'])) {
         // Retrieve the user's name from the database based on their username
         $servername = "sql6.freemysqlhosting.net";
-        $username = "sql6634696";
-        $password = "ZYsbV2d5f7";
-        $dbname = "sql6634696";
+        $username = getenv('db_username');
+        $password = getenv('db_pwd');
+        $dbname = getenv('db_username');
 
         // Create connection
         $conn = new mysqli($servername, $username, $password, $dbname);

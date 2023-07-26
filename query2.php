@@ -18,12 +18,12 @@
         $preference5 = $_POST['preference_5'];
         $preference6 = $_POST['preference_6'];
 
-               
+
         // Database connection
         $servername = "sql6.freemysqlhosting.net";
-        $username = "sql6634696";
-        $password = "ZYsbV2d5f7";
-        $dbname = "sql6634696";
+        $username = getenv('db_username');
+        $password = getenv('db_pwd');
+        $dbname = getenv('db_username');
 
         // Create connection
         $conn = new mysqli($servername, $username, $password, $dbname);
@@ -95,10 +95,10 @@
         require_once('./vendor/autoload.php');
 
         //Change the next line to $yourApiKey = MY_OPENAI_KEY; if you didn't use an environment variable and set your key in a separate file
-        //$yourApiKey = getenv('MY_OPENAI_KEY');
+        $yourApiKey = getenv('chatgpt_api');
 
         //Create a client object
-        $client = OpenAI::client('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');
+        $client = OpenAI::client($yourApiKey);
 
         error_reporting(E_ERROR | E_PARSE);
         //The $prompt variable stores our entire prompt
