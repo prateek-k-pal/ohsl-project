@@ -3,9 +3,9 @@
 This file contains database configuration assuming you are running mysql using user "root" and password ""
 */
 $host = 'sql6.freemysqlhosting.net';
-$username = 'sql6634696';
+$username = getenv('db_username');
 $password = getenv('db_pwd');
-$database = 'sql6634696';
+$database = getenv('db_username');
 
 // Create a new mysqli object
 $mysqli = new mysqli($host, $username, $password, $database);
